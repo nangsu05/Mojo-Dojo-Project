@@ -1,0 +1,198 @@
+// JavaScript Document
+
+document.addEventListener("scroll", scrollFunction);
+
+var prevScrollY = window.scrollY;
+
+function scrollFunction() {
+	showMenu(1);
+
+	document.getElementById("head-bg").style.top = -(window.scrollY / 7) + "px";
+	document.getElementById("head-text").style.top = -(window.scrollY / 2) + "px";
+
+	document.getElementById("nav").style.animationDelay = "0s";
+	if (window.scrollY - prevScrollY > 0 && window.scrollY > 500) {
+		document.getElementById("nav").style.animationName = "hidenav";
+	} else {
+		document.getElementById("nav").style.animationName = "shownav";
+	}
+	prevScrollY = window.scrollY;
+	invertNav();
+}
+
+function invertNav(cmd) {
+	if (window.scrollY > 100 || cmd) {
+		document.getElementById("navbg").style.animationName = "navbgon";
+		document.getElementById("booking-l").style.borderColor = "#242424";
+		const navlinks = document.getElementsByClassName("navlink");
+		for (let i = 0; i < navlinks.length; i++) {
+			navlinks[i].style.color = "#242424";
+		}
+	} else {
+		document.getElementById("navbg").style.animationName = "navbgoff";
+		document.getElementById("booking-l").style.borderColor = "#FFF";
+		const navlinks = document.getElementsByClassName("navlink");
+		for (let i = 0; i < navlinks.length; i++) {
+			navlinks[i].style.color = "#FFF";
+		}
+	}
+
+}
+
+function showMenu(toOff) {
+	const nav = document.getElementById("nav");
+	const element = document.getElementById("mainmenu-h");
+	const ham = document.getElementById("ham");
+	if (element.style.display == "block" || toOff) {
+		nav.style.height = "66px";
+		element.style.display = "none";
+		ham.innerHTML = "menu";
+		invertNav();
+	} else {
+		nav.style.height = "366px";
+		element.style.display = "block";
+		ham.innerHTML = "close";
+		invertNav(1);
+	}
+}
+
+let isBookingShow = false;
+let currentBookingContent = 0;
+let isBookingFirstInit = true;
+
+function showBooking(content) {
+	const booking = document.getElementById("booking");
+	const overlay = document.getElementById("overlay");
+	if (!isBookingShow && currentBookingContent != 0) {
+		booking.style.animationName = "showbooking";
+		overlay.style.display = "block";
+		overlay.style.animationName = "showoverlay";
+		document.body.style.overflow = "hidden";
+		isBookingShow = true;
+		isBookingFirstInit = false;
+	} else {
+		if (!isBookingFirstInit) {
+			booking.style.animationName = "hidebooking";
+			overlay.style.animationName = "hideoverlay";
+			document.body.style.overflow = "auto";
+			isBookingShow = false;
+		}
+		if (content == 1) {
+			loadBookingDate();
+		} else if (content == 2) {
+			loadBookingDetail();
+		} else if (content == 3) {
+			loadBookingProcess();
+		} else if (content == 4) {
+			loadBookingDone();
+		} else {
+			currentBookingContent = 0;
+			setTimeout(afterHideOverlay, 800);
+		}
+	}
+}
+
+function loadBookingDate() {
+	const xhttp = new XMLHttpRequest();
+	xhttp.onload = function () {
+		document.getElementById("booking_form").innerHTML = this.responseText;
+		currentBookingContent = 1;
+		showBooking();
+	}
+	xhttp.open("GET", "booking-date.php", true);
+	xhttp.send();
+}
+
+
+function loadBookingDetail() {
+	const xhttp = new XMLHttpRequest();
+	xhttp.onload = function () {
+		document.getElementById("booking_form").innerHTML = this.responseText;
+		currentBookingContent = 2;
+		showBooking();
+		setCountdown(300);
+	}
+	let checkin = document.getElementById("checkin").value;
+	let checkout = document.getElementById("checkout").value;
+	xhttp.open("GET", "booking-detail.php?checkin=" + checkin + "&checkout=" + checkout, true);
+	xhttp.send();
+}
+
+function loadBookingProcess() {
+	const xhttp = new XMLHttpRequest();
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var email = document.getElementById("email").value;
+	var tel = document.getElementById("tel").value;
+	var country = document.getElementById("country").value;
+	var remark = document.getElementById("remark").value;
+	var checkin = document.getElementById("checkin").value;
+	var checkout = document.getElementById("checkout").value;
+	const data = new FormData();
+	data.append('fname', fname);
+	data.append('lname', lname);
+	data.append('email', email);
+	data.append('tel', tel);
+	data.append('country', country);
+	data.append('remark', remark);
+	data.append('checkin', checkin);
+	data.append('checkout', checkout);
+	xhttp.onload = function () {
+		document.getElementById("booking_form").innerHTML = this.responseText;
+		currentBookingContent = 3;
+		showBooking();
+	}
+	xhttp.open("POST", "booking-process.php", true);
+	xhttp.send(data);
+}
+
+function loadBookingDone() {
+	const xhttp = new XMLHttpRequest();
+	xhttp.onload = function () {
+		document.getElementById("booking_form").innerHTML = this.responseText;
+		currentBookingContent = 2;
+		showBooking();
+		setCountdown(300);
+	}
+	let bookingID = document.getElementById("checkin").value;
+	xhttp.open("GET", "booking-detail.php?checkin=" + checkin + "&checkout=" + checkout, true);
+	xhttp.send();
+}
+
+let countdownTimeRemain = 0;
+let countdownIntv;
+
+function setCountdown(targetTiming) {
+	clearInterval(countdownIntv);
+	countdownTimeRemain = targetTiming;
+	countdownIntv = setInterval(updateCountdown, 1000);
+}
+
+function updateCountdown() {
+	if (countdownTimeRemain <= 0) {
+		document.getElementById("countdown").innerHTML = "Booking expired!";
+		clearInterval(countdownIntv);
+		showBooking();
+	} else {
+		const minutes = Math.floor(countdownTimeRemain / 60);
+		const seconds = Math.floor(countdownTimeRemain % 60);
+		document.getElementById("countdown").innerHTML = `${minutes}m ${seconds}s`;
+		countdownTimeRemain--;
+	}
+}
+
+function afterHideOverlay() {
+	const overlay = document.getElementById("overlay");
+	overlay.style.display = "none";
+}
+
+function showDetail(obj) {
+	const element = document.getElementById(obj.getAttribute("fordetail"));
+	if (element.style.display != "block") {
+		element.style.display = "block";
+		obj.innerHTML = "- less detail";
+	} else {
+		element.style.display = "none";
+		obj.innerHTML = "+ more detail";
+	}
+}

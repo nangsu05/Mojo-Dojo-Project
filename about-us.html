@@ -77,15 +77,100 @@
       .paragraph {
         color: rgb(48, 33, 33);
       }
-      .row-text-center{
-        font-size: .8rem;
+      .row-text-center {
+        font-size: 0.8rem;
       }
-      .text-center{
+      .text-center {
         line-height: 25px;
+      }
+      .nav-item {
+        padding: 15px 10px;
+      }
+      .bg-navbar {
+        background-color: rgb(241, 250, 212);
+        /* background-color: rgba(0, 0, 0, .1); */
+        opacity: 0.8;
+      }
+      .bg-navbar img {
+        border-radius: 50%;
+      }
+      a {
+        color: rgb(34, 14, 12) !important;
+        font-weight: 600;
+        padding: 2px;
+      }
+      .active,
+      .nav-link:hover {
+        border-bottom: 2px solid black;
+        transition: 1s;
+      }
+      .card-title {
+        font-family: "Sour Gummy", sans-serif;
+        font-size: 1.4rem;
+        color: rgb(72, 11, 11);
+      }
+      .position {
+        font-family: "Sour Gummy", sans-serif;
+        font-size: 1rem;
+        color: rgb(149, 71, 15);
+      }
+      .main-word {
+        font-family: "Sour Gummy", sans-serif;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: rgb(72, 11, 11);
       }
     </style>
   </head>
-  <body cz-shortcut-listen="true">
+  <body>
+    <!-- navbar section  -->
+    <nav class="navbar navbar-expand-lg bg-navbar">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="images/logo.jpg" alt="logo" width="50px" height="50px" />
+          <span1 class="main">Mojo</span1>
+          <span class="main1">Dojo</span></a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#slider"
+          aria-controls="slider"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="slider">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about-us.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="packages.html">Packages</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
     <!-- about-us section  -->
     <section class="about" id="about">
       <div class="container">
@@ -123,34 +208,33 @@
       </div>
     </section>
 
-
-    <div class="container my-3 ">
-      <h2 class=" text-center mb-4 ">Our teams</h2>
+    <div class="container my-3">
+      <h2 class="main-word text-center mb-4">Our teams</h2>
       <div class="row">
-        <div class="col-md-4 mt-s ">
+        <div class="col-md-4 mt-s">
           <div class="card">
             <img src="images/main img.jpg" alt="main img" height="40%" />
             <div class="card-body">
-              <h5 class="card-title text-center">David Smith</h5>
+              <h5 class="card-title text-center">Miss.Ntali</h5>
+              <h3 class="position text-center">HR Management</h3>
               <p class="text-center">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus
-                sint ipsum, praesentium explicabo incidunt culpa quidem delectus
-                in officiis quam pariatur, sed excepturi eligendi consectetur
-                eos qui reiciendis quia possimus.
+                HR manages compensation and benefits programs, including
+                researching pay practices, designing compensation frameworks,
+                and implementing pay structures.
               </p>
             </div>
           </div>
         </div>
         <div class="col-md-4 mt-s">
           <div class="card">
-            <img src="images/main img1.jpg" alt="main img1" />
+            <img src="images/main1.jpg" alt="main1" />
             <div class="card-body">
               <h5 class="card-title text-center">David Smith</h5>
+              <h3 class="position text-center">General Manager</h3>
               <p class="text-center">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus
-                sint ipsum, praesentium explicabo incidunt culpa quidem delectus
-                in officiis quam pariatur, sed excepturi eligendi consectetur
-                eos qui reiciendis quia possimus.
+                Managers set goals and milestones that align with the company's
+                mission. They also ensure that employees understand the vision
+                and their role in helping the team achieve the goals.
               </p>
             </div>
           </div>
@@ -160,11 +244,11 @@
             <img src="images/about img2.jpg" alt="about img2" />
             <div class="card-body text-center">
               <h5 class="card-title">David Smith</h5>
-              <p class="text-center"> 
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Natus
-                sint ipsum, praesentium explicabo incidunt culpa quidem delectus
-                in officiis quam pariatur, sed excepturi eligendi consectetur
-                eos qui reiciendis quia possimus.
+              <h3 class="position text-center">Finance Admin</h3>
+              <p class="text-center">
+                Preparing financial statements that adhere to accounting
+                standards and regulations. These reports provide an overview of
+                a company's financial health and performance
               </p>
             </div>
           </div>

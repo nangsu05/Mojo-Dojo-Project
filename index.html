@@ -37,6 +37,9 @@
     <title>Bootstrap demo</title>
 
     <style>
+      .nav-item {
+        padding: 15px 10px;
+      }
       .bg-navbar {
         background-color: rgb(241, 250, 212);
         /* background-color: rgba(0, 0, 0, .1); */
@@ -47,6 +50,8 @@
       }
       a {
         color: rgb(34, 14, 12) !important;
+        font-weight: 600;
+        padding: 2px;
       }
       .active,
       .nav-link:hover {
@@ -80,9 +85,10 @@
     <nav class="navbar navbar-expand-lg bg-navbar">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="images/logo.jpg" alt="logo" width="50px" height="50px"/>
-          <span1 class="main">Mojo</span1> 
-          <span class="main1">Dojo</span></a>
+          <img src="images/logo.jpg" alt="logo" width="50px" height="50px" />
+          <span1 class="main">Mojo</span1>
+          <span class="main1">Dojo</span></a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -97,16 +103,16 @@
         <div class="collapse navbar-collapse" id="slider">
           <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link " aria-current="page" href="#">Home</a>
+              <a class="nav-link" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-disabled="true">Contact</a>
+              <a class="nav-link" aria-disabled="true">Contact</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " aria-disabled="true">Packages</a>
+              <a class="nav-link" aria-disabled="true">Packages</a>
             </li>
           </ul>
           <form class="d-flex" role="search">
@@ -123,9 +129,9 @@
         </div>
       </div>
     </nav>
-   
+
     <!-- main section  -->
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 mb-5">
       <div class="video-container">
         <video
           autoplay
